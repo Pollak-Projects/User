@@ -1,17 +1,17 @@
 <?php
 
-require_once realpath(__DIR__ . '/vendor/autoload.php');
+//require_once realpath(__DIR__ . '/vendor/autoload.php');
 
 require_once('connect.php');
 
 // Looing for .env at the root directory
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+//$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+//$dotenv->load();
 
 // Checking if the inputs are filled
 $fields = [
     'username',
-    'password'
+    'password',
 ];
 foreach($fields as $field){
     if(!$_POST[$field]){
@@ -21,14 +21,16 @@ foreach($fields as $field){
 }
 
 // Checking if the user exists
-$sql = "SELECT count(*) FROM `users` WHERE `user_name` = ? AND 'user_pass' = ? LIMIT 1";
+$sql = "SELECT * FROM users WHERE user_name = ? AND user_pass = ?";
 $stmt = $mysqli->prepare($sql);
 
 $stmt->bind_param("ss", $_POST['username'], $_POST['password']);
 $stmt->execute();
 
+
 $lines = $stmt->num_rows;
-if($lines <= 1){
+
+if($lines < 1){
     echo 'No user found!';
     return http_response_code(401);
 }
