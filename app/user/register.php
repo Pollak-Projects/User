@@ -30,7 +30,7 @@ $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("sss", $_POST['username'], $_POST['password'], $_POST['email']);
 $stmt->execute();
 
-$lines = $stmt->num_row;
+$lines = $stmt->$num_row;
 if($lines >= 1){
     echo 'User as alias already exists!';
     return http_response_code(409);
@@ -51,5 +51,3 @@ else{
         return http_response_code(200);
     }
 }
-
-?>
