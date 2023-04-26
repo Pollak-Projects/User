@@ -1,9 +1,12 @@
 <?php
-require_once("connect.php");
+require_once(".../global/database_connection/global_connect.php");
+
+$DatabaseConnect = new DatabaseConnect();
+$mysqli = $DatabaseConnect->ConnectToDatabaseTable();
 
 $quizId = $_POST['quizId'];
 
-$sql = "SELECT * FROM `questions` where `quiz_id` = ".$quizId."";
+$sql = "SELECT * FROM `questions` where `quiz_id` = " . $quizId . "";
 
 $result = $mysqli->query($sql);
 
@@ -26,5 +29,3 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($data);
-
-?>
