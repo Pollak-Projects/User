@@ -2,7 +2,7 @@
 require_once(".../global/database_connection/global_connect.php");
 
 $DatabaseConnect = new DatabaseConnect();
-$mysqli = $DatabaseConnect->ConnectToDatabaseTable("Questions");
+$mysqli = $DatabaseConnect->ConnectToDatabaseTable();
 
 $quizId = $_POST['quizId'];
 
